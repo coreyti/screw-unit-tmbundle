@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>name</key>
+	<string>Screw.Unit</string>
+	<key>ordering</key>
+	<array>
+		<string>7010BDF6-5951-47A8-B45E-30D41DFCCFF7</string>
+		<string>FFA44CE0-9C1E-4478-B398-576E6E963783</string>
+		<string>C2A85AA6-9FCA-450C-80FF-2922B81609B4</string>
+		<string>A0FF873B-50F0-4480-884E-2FFDF8841BD7</string>
+		<string>FEBAF582-88FB-4B0A-91D6-5CA41500C4DB</string>
+		<string>E175D080-6B48-4AE6-98CE-23D169DED3E1</string>
+		<string>48D6341B-E462-46AA-9B1A-6F7C8C1E9D39</string>
+		<string>175A0D07-2488-46D3-AC03-1F3BC09CC004</string>
+		<string>0E1F9B2B-6F6A-4993-B056-82EFDCDFCB4A</string>
+		<string>81E43FEC-3FAD-4A74-8914-B032473B07DE</string>
+		<string>46479127-86CC-485F-8281-FE91A4B44E6D</string>
+		<string>794C9ECF-F637-4549-805C-6E75A117A640</string>
+		<string>13241AEB-F6CB-4326-93FF-F1732CAE2D6A</string>
+		<string>8CAB0D7C-AA67-4C52-937C-A07FF8872EDC</string>
+		<string>CB5C0F81-7DD0-49E6-9C4A-4A722056E5EE</string>
+	</array>
+	<key>uuid</key>
+	<string>CBDB525F-EADB-4580-B4C7-E9EB048324A3</string>
+</dict>
+</plist>
