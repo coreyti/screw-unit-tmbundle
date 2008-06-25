@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/perl
+
+my $in, $string, $name, $requires;
+
+while (&lt;STDIN&gt;) {
+  $in .= $_;
+}
+
+my @pieces = split(/\n/, $in);
+my $indent = "    ";
+if($ENV{'TM_SELECTED_TEXT'}) {
+  $indent = "";
+}
+
+foreach(@pieces) {
+  # require (strip, because we'll reprint them)
+  if(/^require/) {
+    $requires .= $_ . "\n";
+  }
+  elsif(/^function [\w]*Spec\(\) \{\}/) {
+    # ignore
+  }
+  elsif(/^Spec\.register\(([\w]*)Spec\)/) {
+    $name = $1;
+  }
+  else {
+    $string .= $indent . $_ . "\n";
+  }
+}
+
+my $balanced_braces;
+$balanced_braces = qr/
+  \{ # Opening bracket
+  ((?: # Capture the contents 
+    [^}{]+ # Body of a link
+    |
+    (??{$balanced_braces}) # Or recurse
+  )+) # and allow repeats internally
+  \} # Closing bracket
+  /x;
+
+
+# NOTES:
+#  *  [^'"]* will not handle nested, escape quotes
+#  *  not handling matchers with newlines (probably need to do balancing there too)
+
+
+# describe
+$string =~ s/[\w]*\.describe\((["'])[\s]*([^\n]*)["'],[\s]*($balanced_braces)\)/describe($1$2$1, function() $3)/g;
+
+# before|after
+$string =~ s/[\w]*\[?["'](before|after) each["']\]?[\s]*[:=][\s]*function\(\)[\s]*($balanced_braces)[,;]?/$1(function() $2);/g;
+
+# it
+$string =~ s/(["'])([^\n]*)["']:[\s]*function\(\)[\s]*($balanced_braces)[,]?/it($1$2$1, function() $3);/g;
+
+# matcher: should_be | should_not_be
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_be\(([^\n]*)\)[;]?/expect($1).to$2(equal, $3);/g;
+
+# matcher: should_match | should_not_match
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_match\(([^\n]*)\)[;]?/expect($1).to$2(match, $3);/g;
+
+# matcher: should_be_false | should_be_true
+$string =~ s/value_of\(([^\n]*)\)\.should_be_(true|false)\(\)[;]?/expect($1).to(equal, $2);/g;
+
+# matcher: should_be_undefined | should_not_be_undefined
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_be_undefined\(\)[;]?/expect(typeof($1)).to$2(equal, 'undefined');/g;
+
+# matcher: should_have | should_not_have
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_have\(([^\n]*), ['"]([^\n]*)['"]\)[;]?/expect($1.$4).to$2(equal, $3);/g;
+
+# matcher: should_be_empty | should_not_be_empty
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_be_empty\(\)[;]?/expect($1.length).to$2(equal, 0);/g;
+
+# matcher: should_be_null | should_not_be_null
+$string =~ s/value_of\(([^\n]*)\)\.should(_not)?_be_null\(\)[;]?/expect($1).to$2(equal, null);/g;
+
+if($ENV{'TM_SELECTED_TEXT'}) {
+  print $string;
+}
+else {
+  print $requires . "\n";
+  print "Screw.Unit(function() {" . "\n";
+  print "  describe('" . $name . "', function() {";
+  print $string;
+  print "  });" . "\n";
+  print "});" . "\n";
+}
+</string>
+	<key>fallbackInput</key>
+	<string>document</string>
+	<key>input</key>
+	<string>selection</string>
+	<key>name</key>
+	<string>Convert from JSSpec in Document / Selection</string>
+	<key>output</key>
+	<string>replaceSelectedText</string>
+	<key>scope</key>
+	<string>source.js.screw-unit</string>
+	<key>uuid</key>
+	<string>F906B329-E99B-408F-9F48-810DCC40A202</string>
+</dict>
+</plist>
