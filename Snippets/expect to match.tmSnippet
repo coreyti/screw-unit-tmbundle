@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>expect(${1:target}).to(match, ${2:value});
-</string>
+	<string>expect(${1:target}).to(match, ${2:value});</string>
 	<key>name</key>
 	<string>expect to match</string>
 	<key>scope</key>

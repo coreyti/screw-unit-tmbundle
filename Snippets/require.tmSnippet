@@ -3,8 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>require("${1:/specs/spec_helper}");
-</string>
+	<string>require("${1:/specs/spec_helper}");</string>
 	<key>name</key>
 	<string>require</string>
 	<key>scope</key>
