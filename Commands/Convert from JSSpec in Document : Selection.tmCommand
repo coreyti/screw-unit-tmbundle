@@ -99,7 +99,7 @@ else {
 	<key>input</key>
 	<string>selection</string>
 	<key>name</key>
-	<string>Convert from JSSpec in Document / Selection</string>
+	<string>from JSSpec</string>
 	<key>output</key>
 	<string>replaceSelectedText</string>
 	<key>scope</key>

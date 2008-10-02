@@ -7,7 +7,7 @@
   $0
 });</string>
 	<key>name</key>
-	<string>descibe</string>
+	<string>describe</string>
 	<key>scope</key>
 	<string>source.js.screw-unit</string>
 	<key>tabTrigger</key>
