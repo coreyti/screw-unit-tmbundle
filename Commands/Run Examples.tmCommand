@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby
+
+path = ENV['TM_FILEPATH']
+url  = "http://localhost:8080/specs#{path.sub(/.*\/spec\/javascripts(.*)\.js$/, '\1')}"
+
+`open #{url}`
+</string>
+	<key>input</key>
+	<string>none</string>
+	<key>keyEquivalent</key>
+	<string>@r</string>
+	<key>name</key>
+	<string>Run Examples (with screw-unit-server)</string>
+	<key>output</key>
+	<string>showAsTooltip</string>
+	<key>scope</key>
+	<string>source.js.screw-unit</string>
+	<key>uuid</key>
+	<string>71C7067E-8F00-4EE4-8285-1D08687FD5CD</string>
+</dict>
+</plist>
