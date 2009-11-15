@@ -7,8 +7,22 @@
 	<key>command</key>
 	<string>#!/usr/bin/env ruby
 
-path = ENV['TM_FILEPATH']
-url  = "http://localhost:8080/specs#{path.sub(/.*\/spec\/javascripts(.*)\.js$/, '\1')}"
+path    = ENV['TM_FILEPATH']
+project = ENV['TM_PROJECT_DIRECTORY']
+port    = '8080'
+config  = File.join(project, '.screwrc')
+
+if File.exist? config
+  File.open(config, 'r') do |input|
+    while(line = input.gets)
+      if(line =~ /^\s*port/)
+        port = line.strip.sub(/port\s*/, '')
+      end
+    end
+  end
+end
+
+url  = "http://localhost:#{port}/specs#{path.sub(/.*\/spec\/javascripts(.*)\.js$/, '\1')}"
 
 `open #{url}`
 </string>
