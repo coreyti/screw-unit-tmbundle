@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>content</key>
-	<string>Screw.Unit(function() {
+	<string>Screw.Unit(function(c) { with(c) {
   $0
-});
+}});
 </string>
 	<key>name</key>
 	<string>Screw.Unit</string>
